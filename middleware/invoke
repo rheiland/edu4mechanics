@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/usr/bin/invoke_app "$@" -C "start_jupyter -A -T @tool edu4mechanics.ipynb" -t edu4mechanics \
+                         -u anaconda3-5.1
