@@ -37,6 +37,7 @@ class CellsTab(object):
 
         self.output_dir = '.'
 
+        constWidth = '380px'
         constWidth = '180px'
 
 #        self.fig = plt.figure(figsize=(6, 6))
@@ -60,10 +61,10 @@ class CellsTab(object):
         # widgets.HBox([play, slider])
 
         # "plot_size" controls the size of the tab height, not the plot (rf. figsize for that)
-        plot_size = '500px'  # small: 
-        plot_size = '750px'  # medium
-        plot_size = '700px'  # medium
         plot_size = '600px'  # medium
+        plot_size = '700px'  # medium
+        plot_size = '750px'  # medium
+        plot_size = '500px'  # small: 
         self.cells_plot.layout.width = plot_size
         self.cells_plot.layout.height = plot_size
         self.use_defaults = True
@@ -155,8 +156,8 @@ class CellsTab(object):
 
         #----------
         style = {'description_width': '25%'}
-        name_button_layout={'width':'25%'}
-        widget_layout = {'width': '15%'}
+        name_button_layout={'width':'50%'}
+        widget_layout = {'width': '20%'}
 
         param_name6 = Button(description='adhesion_strength', disabled=True, layout=name_button_layout)
         param_name6.style.button_color = 'tan'
@@ -187,14 +188,21 @@ class CellsTab(object):
         row8 = [param_name8, self.rel_max_adhesion_dist] 
 
         box_layout = Layout(display='flex', flex_flow='row', align_items='stretch', width='100%')
+        # box_layout = Layout(display='flex', flex_flow='row', align_items='stretch', width='50%')
         box6 = Box(children=row6, layout=box_layout)
         box7 = Box(children=row7, layout=box_layout)
         box8 = Box(children=row8, layout=box_layout)
 
+        wbox6 = Box(children=row6, layout=box_layout)
+        wbox7 = Box(children=row7, layout=box_layout)
+        wbox8 = Box(children=row8, layout=box_layout)
+        self.pwidgets = VBox([wbox6, wbox7, wbox8])
+
         #----------
         self.params = VBox([box6,box7,box8])
         self.plot_stuff = VBox([row1, self.cells_plot])
-        self.tab = VBox([self.plot_stuff, self.params])
+        # self.tab = HBox([self.plot_stuff, self.params])
+        self.tab = HBox([self.plot_stuff, self.pwidgets], layout=box_layout)
 
 
     # def update(self, rdir=''):
@@ -387,10 +395,10 @@ class CellsTab(object):
         #   plt.scatter(xvals,yvals, s=rvals*scale_radius, c=rgbs)
 
         # TODO: make figsize a function of plot_size? What about non-square plots?
-        # self.fig = plt.figure(figsize=(9, 9))
         # self.fig = plt.figure(figsize=(18, 18))
         # self.fig = plt.figure(figsize=(15, 15))  # 
-        self.fig = plt.figure(figsize=(9, 9))  # 
+        # self.fig = plt.figure(figsize=(9, 9))  # 
+        self.fig = plt.figure(figsize=(8, 8))  # 
 
 
         #rwh - temp fix - Ah, error only occurs when "edges" is toggled on
